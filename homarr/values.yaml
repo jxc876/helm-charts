@@ -2,13 +2,15 @@ nameOverride: ""
 fullnameOverride: ""
 
 nfsServer: "nfs.mydomain.lan"
+
 volumes: 
- - name: data
-   nfsPath: ""
+ - name: "data"
    mountPath: "/data"
- - name: config
-   nfsPath: ""
+   nfsPath: "/mnt/ssd-vdev/k8/homarr/data"
+
+ - name: "config"
    mountPath: "/app/data/configs"
+   nfsPath: "/mnt/ssd-vdev/k8/homarr/config"
 
 service:
   type: ClusterIP

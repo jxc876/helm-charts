@@ -22,15 +22,15 @@ spec:
               protocol: TCP
 
           volumeMounts:
-            {{- range .Values.persistence }}
-            - name: {{- .name }}
-              mountPath: {{- .mountPath }}
+            {{- range .Values.volumes }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
             {{- end }}
 
       volumes:
-        {{- range .Values.persistence }}
-        - name: {{- .name }}
-            nfs:
-              server: {{- .Values.nfsServer }}
-              path: {{- .nfsPath }}
+        {{- range .Values.volumes }}
+        - name: {{ .name }}
+          nfs:
+            server: {{ $.Values.nfsServer }}
+            path: {{ .nfsPath }}
         {{- end }}
