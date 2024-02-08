@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: homarr-pod
-  template:s
+  template:
     metadata:
       labels:
         app: homarr-pod
@@ -18,15 +18,14 @@ spec:
         
           ports:
             - name: ui
-              containerPort: {{ .Values.service.port }}
+              containerPort: 7575
               protocol: TCP
 
           volumeMounts:
-            - name: data
-              mountPath: /data
-
-            - name: config
-              mountPath: /app/data/configs
+            {{- range .Values.persistence }}
+            - name: {{- .name }}
+              mountPath: {{- .mountPath }}
+            {{- end }}
 
       volumes:
         {{- range .Values.persistence }}

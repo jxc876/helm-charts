@@ -5,8 +5,10 @@ nfsServer: "nfs.mydomain.lan"
 volumes: 
  - name: data
    nfsPath: ""
+   mountPath: "/data"
  - name: config
    nfsPath: ""
+   mountPath: "/app/data/configs"
 
 service:
   type: ClusterIP

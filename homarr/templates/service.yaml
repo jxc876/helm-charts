@@ -8,8 +8,7 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
+      targetPort: ui
       protocol: TCP
-      name: ui
   selector:
     app: homarr-pod
