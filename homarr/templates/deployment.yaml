@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homarr-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homarr-pod
+  template:s
+    metadata:
+      labels:
+        app: homarr-pod
+    spec:
+      containers:
+        - name: homarr
+          image: ghcr.io/ajnart/homarr:latest
+        
+          ports:
+            - name: ui
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+
+          volumeMounts:
+            - name: data
+              mountPath: /data
+
+            - name: config
+              mountPath: /app/data/configs
+
+      volumes:
+        {{- range .Values.persistence }}
+        - name: {{- .name }}
+            nfs:
+              server: {{- .Values.nfsServer }}
+              path: {{- .nfsPath }}
+        {{- end }}

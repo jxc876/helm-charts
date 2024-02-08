@@ -1,0 +1,24 @@
+nameOverride: ""
+fullnameOverride: ""
+
+nfsServer: "nfs.mydomain.lan"
+volumes: 
+ - name: data
+   nfsPath: ""
+ - name: config
+   nfsPath: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  host: ""
+  className: ""
+    # kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
